@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.27.3" />
     <PackageReference Include="TheSingularityWorkshop.FSM_API" Version="1.0.10" />
   </ItemGroup>
 
