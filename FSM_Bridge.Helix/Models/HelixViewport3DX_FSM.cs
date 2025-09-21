@@ -10,7 +10,7 @@ using TheSingularityWorkshop.FSM_API;
 
 using static TheSingularityWorkshop.FSM_API.FSM_API;
 
-namespace FSM_Helix.Models
+namespace FSM_Helix.FSM_Bridge.Helix.Models
 {
     public class HelixViewport3DX_FSM : IStateContext
     {
