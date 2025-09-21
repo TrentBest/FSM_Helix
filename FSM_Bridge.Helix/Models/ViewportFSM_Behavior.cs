@@ -1,7 +1,6 @@
-﻿
-using TheSingularityWorkshop.FSM_API;
+﻿using TheSingularityWorkshop.FSM_API;
 
-namespace FSM_Helix.Models
+namespace FSM_Helix.FSM_Bridge.Helix.Models
 {
     internal class ViewportFSM_Behavior
     {
