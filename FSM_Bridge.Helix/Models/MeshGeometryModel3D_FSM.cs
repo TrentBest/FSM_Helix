@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using TheSingularityWorkshop.FSM_API;
 
-namespace FSM_Helix.Models
+namespace FSM_Helix.FSM_Bridge.Helix.Models
 {
     public class MeshGeometryModel3D_FSM : IStateContext
     {

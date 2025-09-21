@@ -1,7 +1,6 @@
-﻿
-using TheSingularityWorkshop.FSM_API;
+﻿using TheSingularityWorkshop.FSM_API;
 
-namespace FSM_Helix
+namespace FSM_Helix.FSM_Bridge.Helix.Models
 {
     public class MeshGeometryModel3D_FSM_Behavior
     {
