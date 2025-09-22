@@ -24,7 +24,11 @@ jobs:
         run: dotnet build FSM_Bridge.Helix/FSM_Helix.csproj --no-restore --configuration Release
       
       - name: Pack NuGet package
-        run: dotnet pack FSM_Bridge.Helix/FSM_Helix.csproj --no-build -c Release -o ./nuget_packages --version-suffix "$GITHUB_RUN_NUMBER"
+        id: pack
+        run: |
+          dotnet pack FSM_Bridge.Helix/FSM_Helix.csproj --no-build -c Release -o ./nuget_packages --version-suffix "$GITHUB_RUN_NUMBER"
+          $packagePath = (Get-ChildItem -Path ./nuget_packages -Filter *.nupkg).FullName
+          echo "PACKAGE_PATH=$packagePath" >> $env:GITHUB_ENV
       
       - name: Publish to NuGet
-        run: dotnet nuget push "./nuget_packages/*.nupkg" --api-key ${{secrets.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json"
+        run: dotnet nuget push "$env:PACKAGE_PATH" --api-key ${{secrets.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json"
