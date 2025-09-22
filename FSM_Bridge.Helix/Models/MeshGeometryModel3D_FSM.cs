@@ -10,21 +10,21 @@ using TheSingularityWorkshop.FSM_API;
 
 namespace TheSingularityWorkshop.FSM_Bridge.Helix
 {
-    public class MeshGeometryModel3D_FSM : IStateContext
+    public class MeshGeometryModel3D_FSM : HelixStateContext
     {
-
-        public bool IsValid { get; set; } = false;
-        public string Name { get; set; }
-
         public MeshGeometryModel3D Internal { get; set; }
         public string MeshUpdateGroup { get; set; } = "MeshUpdateGroup";
         public string MeshTransformUpdateGroup { get; private set; } = "MeshTransformUpdateGroup";
 
-        public MeshGeometryModel3D_FSM(MeshGeometryModel3D internalModel)
+        public MeshGeometryModel3D_FSM(MeshGeometryModel3D internalModel) : base($"MeshGeometryModel3D_FSM:{internalModel.GUID}")
         {
             Internal = internalModel;
-            Name = $"MeshGeometryModel3D_FSM:{Internal.GUID}";//ToDo:  This might be bloating.
+            DefineFSMs();
+            IsValid = true;
+        }
 
+        private void DefineFSMs()
+        {
             if (!FSM_API.FSM_API.Interaction.Exists("MeshGeometryModel3D_FSM", MeshUpdateGroup))
             {
                 FSM_API.FSM_API.Create.CreateFiniteStateMachine("MeshGeometryModel3D_FSM", 0, MeshUpdateGroup)
@@ -37,7 +37,10 @@ namespace TheSingularityWorkshop.FSM_Bridge.Helix
                     .Transition("Unloaded", "Loaded", MeshGeometryModel3D_FSM_Behavior.ToLoaded)
                     .Transition("Loaded", "Unloaded", MeshGeometryModel3D_FSM_Behavior.ToUnloaded)
                     .BuildDefinition();
+            }
 
+            if (!FSM_API.FSM_API.Interaction.Exists("MeshTransform_FSM", MeshTransformUpdateGroup))
+            {
                 FSM_API.FSM_API.Create.CreateFiniteStateMachine("MeshTransform_FSM", 0, MeshTransformUpdateGroup)
                 .State("Composed", MeshGeometryModel3D_FSM_Behavior.OnEnterComposed,
                     MeshGeometryModel3D_FSM_Behavior.OnUpdateComposed,
@@ -55,7 +58,6 @@ namespace TheSingularityWorkshop.FSM_Bridge.Helix
                 .Transition("Deforming", "Composed", MeshGeometryModel3D_FSM_Behavior.WhenDeformationIsApplied)
                 .BuildDefinition();
             }
-            IsValid = true;
         }
     }
 }
