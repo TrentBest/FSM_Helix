@@ -1,167 +1,158 @@
 ﻿using TheSingularityWorkshop.FSM_API;
 
-namespace FSM_Helix.FSM_Bridge.Helix.Models
+namespace TheSingularityWorkshop.FSM_Bridge.Helix
 {
     internal class ViewportFSM_Behavior
     {
-        internal static void OnEnterCameraMoving(IStateContext context)
+        // Viewport Lifecycle
+        internal static void OnEnterUnloaded(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                c.Internal.IsRendering = false;
+                c.Internal.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
-        internal static void OnEnterCameraStatic(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
+        internal static void OnUpdateUnloaded(IStateContext context) { }
 
-        internal static void OnEnterInteractionActive(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnEnterInteractionPassive(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
+        internal static void OnExitUnloaded(IStateContext context) { }
 
         internal static void OnEnterLoaded(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                c.Internal.IsRendering = true;
+                c.Internal.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
+        internal static void OnUpdateLoaded(IStateContext context) { }
+
+        internal static void OnExitLoaded(IStateContext context) { }
+
+        // Rendering States
         internal static void OnEnterRendering(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                c.Internal.IsRendering = true;
+                c.Internal.Visibility = System.Windows.Visibility.Visible;
+            }
         }
+
+        internal static void OnUpdateRendering(IStateContext context) { }
+
+        internal static void OnExitRendering(IStateContext context) { }
 
         internal static void OnEnterSuspended(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                c.Internal.IsRendering = false;
+            }
         }
 
-        internal static void OnEnterUnloaded(IStateContext context)
+        internal static void OnUpdateSuspended(IStateContext context) { }
+
+        internal static void OnExitSuspended(IStateContext context) { }
+
+        // Camera and Interaction States
+        internal static void OnEnterCameraMoving(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                c.Internal.Camera.ChangeLookDirection(c.Internal.Camera.LookDirection, 0.1, 0);
+            }
         }
 
-        internal static void OnExitCameraMoving(IStateContext context)
+        internal static void OnUpdateCameraMoving(IStateContext context) { }
+
+        internal static void OnExitCameraMoving(IStateContext context) { }
+
+        internal static void OnEnterCameraStatic(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                // Logic to handle camera static state
+            }
         }
 
-        internal static void OnExitCameraStatic(IStateContext context)
+        internal static void OnUpdateCameraStatic(IStateContext context) { }
+
+        internal static void OnExitCameraStatic(IStateContext context) { }
+
+        internal static void OnEnterInteractionActive(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                // Logic for active user interaction
+            }
         }
 
-        internal static void OnExitInteractionActive(IStateContext context)
+        internal static void OnUpdateInteractionActive(IStateContext context) { }
+
+        internal static void OnExitInteractionActive(IStateContext context) { }
+
+        internal static void OnEnterInteractionPassive(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                // Logic for passive user interaction
+            }
         }
 
-        internal static void OnExitInteractionPassive(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
+        internal static void OnUpdateInteractionPassive(IStateContext context) { }
 
-        internal static void OnExitLoaded(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
+        internal static void OnExitInteractionPassive(IStateContext context) { }
 
-        internal static void OnExitRendering(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnExitSuspended(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnExitUnloaded(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnUpdateCameraMoving(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnUpdateCameraStatic(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnUpdateInteractionActive(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnUpdateInteractionPassive(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnUpdateLoaded(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnUpdateRendering(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnUpdateSuspended(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void OnUpdateUnloaded(IStateContext context)
-        {
-            throw new NotImplementedException();
-        }
-
+        // Transition Conditions
         internal static bool ToLoaded(IStateContext context)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         internal static bool ToUnloaded(IStateContext context)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         internal static bool WhenCameraMoves(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                return c.IsCameraMoving;
+            }
+            return false;
         }
 
         internal static bool WhenCameraStops(IStateContext context)
         {
-            throw new NotImplementedException();
+            if (context is HelixViewport3DX_FSM c)
+            {
+                return !c.IsCameraMoving;
+            }
+            return false;
         }
 
         internal static bool WhenInputOccurs(IStateContext context)
         {
-            throw new NotImplementedException();
+            return false; // Placeholder for actual input detection
         }
 
         internal static bool WhenInputStops(IStateContext context)
         {
-            throw new NotImplementedException();
+            return false; // Placeholder for actual input stop detection
         }
 
         internal static bool WhenRenderingResumed(IStateContext context)
         {
-            throw new NotImplementedException();
+            return false; // Placeholder for rendering resumed event
         }
 
         internal static bool WhenRenderingSuspended(IStateContext context)
         {
-            throw new NotImplementedException();
+            return false; // Placeholder for rendering suspended event
         }
     }
 }

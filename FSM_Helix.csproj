@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
-		<TargetFramework>net8.0-windows</TargetFramework>
+		<TargetFramework>net481</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
@@ -14,20 +13,20 @@
 		<Company>TheSingularityWorkshop</Company>
 		<Description>A bridge layer to integrate the FSM_API with the Helix Toolkit for VR and 3D applications.</Description>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>your_github_repository_url</RepositoryUrl>
+		<RepositoryUrl>https://github.com/TrentBest/FSM_Helix</RepositoryUrl>
+		<NoWarn>$(NoWarn);CS1701</NoWarn>
 	</PropertyGroup>
-
-		<ItemGroup>
-			<None Include="Visuals\TheSingularityWorkshop.png" Pack="true" PackagePath="" />
-		</ItemGroup>
-
+	<ItemGroup>
+	  <Compile Remove="Visuals\**" />
+	  <EmbeddedResource Remove="Visuals\**" />
+	  <None Remove="Visuals\**" />
+	  <Page Remove="Visuals\**" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.27.3" />
-		<PackageReference Include="TheSingularityWorkshop.FSM_API" Version="1.0.10" />
+		<PackageReference Include="TheSingularityWorkshop.FSM_API" Version="1.0.11" />
 	</ItemGroup>
-
 	<ItemGroup>
 		<Reference Include="PresentationFramework" />
 	</ItemGroup>
-
 </Project>
