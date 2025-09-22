@@ -12,7 +12,7 @@
 		<Authors>TheSingularityWorkshop</Authors>
 		<Company>TheSingularityWorkshop</Company>
 		<Description>A bridge layer to integrate the FSM_API with the Helix Toolkit for VR and 3D applications.</Description>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageReadmeFile>NuGetReadme</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/TrentBest/FSM_Helix</RepositoryUrl>
 		<NoWarn>$(NoWarn);CS1701</NoWarn>
 	</PropertyGroup>
