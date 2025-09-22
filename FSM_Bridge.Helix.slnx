@@ -1,5 +1,5 @@
 <Solution>
   <Folder Name="/FSM_Bridge.Helix/">
-    <Project Path="FSM_Helix.csproj" />
+    <Project Path="FSM_Bridge.Helix/FSM_Helix.csproj" />
   </Folder>
 </Solution>
