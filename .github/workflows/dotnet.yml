@@ -1,0 +1,35 @@
+name: .NET CI/CD
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build-and-publish:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x' # Your project is net481, which uses a .NET 6+ SDK for building.
+          
+      - name: Restore dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+      
+      # Since you don't have tests, we'll skip the test step for now.
+      # When you add tests, you would uncomment the following lines.
+      #- name: Test
+      #  run: dotnet test --no-build --verbosity normal
+
+      - name: Pack NuGet package
+        run: dotnet pack --no-build -c Release -o ./nuget_packages --version-suffix "$GITHUB_RUN_NUMBER"
+      
+      - name: Publish to NuGet
+        run: dotnet nuget push "./nuget_packages/*.nupkg" --api-key ${{secrets.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json"
