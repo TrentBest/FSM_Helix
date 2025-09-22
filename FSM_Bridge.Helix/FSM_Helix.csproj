@@ -32,4 +32,7 @@
 	<ItemGroup>
 	  <Folder Include="FSM_Bridge.Helix\Branding\" />
 	</ItemGroup>
+	<ItemGroup>
+		<None Include="NugetReadme.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 </Project>
