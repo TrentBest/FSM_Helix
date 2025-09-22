@@ -17,7 +17,10 @@
 		<NoWarn>$(NoWarn);CS1701</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Include="Visuals\TheSingularityWorkshop.png" Pack="true" PackagePath="" />
+	  <Compile Remove="Visuals\**" />
+	  <EmbeddedResource Remove="Visuals\**" />
+	  <None Remove="Visuals\**" />
+	  <Page Remove="Visuals\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.27.3" />
