@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using TheSingularityWorkshop.FSM_API;
 
-namespace FSM_Helix.FSM_Bridge.Helix.Models
+namespace TheSingularityWorkshop.FSM_Bridge.Helix
 {
     public class MeshGeometryModel3D_FSM : IStateContext
     {
@@ -25,9 +25,9 @@ namespace FSM_Helix.FSM_Bridge.Helix.Models
             Internal = internalModel;
             Name = $"MeshGeometryModel3D_FSM:{Internal.GUID}";//ToDo:  This might be bloating.
 
-            if (!FSM_API.Interaction.Exists("MeshGeometryModel3D_FSM", MeshUpdateGroup))
+            if (!FSM_API.FSM_API.Interaction.Exists("MeshGeometryModel3D_FSM", MeshUpdateGroup))
             {
-                FSM_API.Create.CreateFiniteStateMachine("MeshGeometryModel3D_FSM", 0, MeshUpdateGroup)
+                FSM_API.FSM_API.Create.CreateFiniteStateMachine("MeshGeometryModel3D_FSM", 0, MeshUpdateGroup)
                     .State("Unloaded", MeshGeometryModel3D_FSM_Behavior.OnEnterUnloaded,
                     MeshGeometryModel3D_FSM_Behavior.OnUpdateUnloaded,
                     MeshGeometryModel3D_FSM_Behavior.OnExitUnloaded)
@@ -38,7 +38,7 @@ namespace FSM_Helix.FSM_Bridge.Helix.Models
                     .Transition("Loaded", "Unloaded", MeshGeometryModel3D_FSM_Behavior.ToUnloaded)
                     .BuildDefinition();
 
-                FSM_API.Create.CreateFiniteStateMachine("MeshTransform_FSM", 0, MeshTransformUpdateGroup)
+                FSM_API.FSM_API.Create.CreateFiniteStateMachine("MeshTransform_FSM", 0, MeshTransformUpdateGroup)
                 .State("Composed", MeshGeometryModel3D_FSM_Behavior.OnEnterComposed,
                     MeshGeometryModel3D_FSM_Behavior.OnUpdateComposed,
                     MeshGeometryModel3D_FSM_Behavior.OnExitComposed)

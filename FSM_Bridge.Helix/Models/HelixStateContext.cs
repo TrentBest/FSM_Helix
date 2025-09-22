@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using TheSingularityWorkshop.FSM_API;
 
-namespace FSM_Helix.FSM_Bridge.Helix.Models
+namespace TheSingularityWorkshop.FSM_Bridge.Helix
 {
     public abstract class HelixStateContext : IStateContext, IDisposable
     {
@@ -43,12 +43,12 @@ namespace FSM_Helix.FSM_Bridge.Helix.Models
                     if (HelixStatus != null && HelixStatus.IsValid)
                     {
                         TriggerSubFSMTransition("Lifecycle", "ToUnloaded");
-                        FSM_API.Interaction.DestroyInstance(HelixStatus);
+                        FSM_API.FSM_API.Interaction.DestroyInstance(HelixStatus);
                     }
 
                     foreach (var handle in SubStatus.Values)
                     {
-                        FSM_API.Interaction.DestroyInstance(handle);
+                        FSM_API.FSM_API.Interaction.DestroyInstance(handle);
                     }
                 }
                 IsValid = false;

@@ -17,8 +17,8 @@ namespace TheSingularityWorkshop.FSM_Bridge.Helix
             Internal = internalModel;
             DefineFSMs();
 
-            this.HelixStatus = FSM_API.Create.CreateInstance("LineLifecycle_FSM", this, "LineLifecycleGroup");
-            this.SubStatus["Appearance"] = FSM_API.Create.CreateInstance("LineAppearance_FSM", this, "LineAppearanceGroup");
+            this.HelixStatus = FSM_API.FSM_API.Create.CreateInstance("LineLifecycle_FSM", this, "LineLifecycleGroup");
+            this.SubStatus["Appearance"] = FSM_API.FSM_API.Create.CreateInstance("LineAppearance_FSM", this, "LineAppearanceGroup");
 
             this.IsValid = true;
         }
@@ -26,10 +26,10 @@ namespace TheSingularityWorkshop.FSM_Bridge.Helix
         private void DefineFSMs()
         {
             // FSM for the lifecycle of the line component
-            if (!FSM_API.Interaction.Exists("LineLifecycle_FSM", "LineLifecycleGroup"))
+            if (!FSM_API.FSM_API.Interaction.Exists("LineLifecycle_FSM", "LineLifecycleGroup"))
             {
-                FSM_API.Create.CreateProcessingGroup("LineLifecycleGroup");
-                FSM_API.Create.CreateFiniteStateMachine("LineLifecycle_FSM", 0, "LineLifecycleGroup")
+                FSM_API.FSM_API.Create.CreateProcessingGroup("LineLifecycleGroup");
+                FSM_API.FSM_API.Create.CreateFiniteStateMachine("LineLifecycle_FSM", 0, "LineLifecycleGroup")
                     .State("Unloaded", FSM_Behavior.OnEnterUnloaded, FSM_Behavior.OnUpdateUnloaded, FSM_Behavior.OnExitUnloaded)
                     .State("Loaded", FSM_Behavior.OnEnterLoaded, FSM_Behavior.OnUpdateLoaded, FSM_Behavior.OnExitLoaded)
                     .Transition("Unloaded", "Loaded", FSM_Behavior.WhenLoaded)
@@ -38,10 +38,10 @@ namespace TheSingularityWorkshop.FSM_Bridge.Helix
             }
 
             // FSM for the visual appearance/behavior of the line
-            if (!FSM_API.Interaction.Exists("LineAppearance_FSM", "LineAppearanceGroup"))
+            if (!FSM_API.FSM_API.Interaction.Exists("LineAppearance_FSM", "LineAppearanceGroup"))
             {
-                FSM_API.Create.CreateProcessingGroup("LineAppearanceGroup");
-                FSM_API.Create.CreateFiniteStateMachine("LineAppearance_FSM", 0, "LineAppearanceGroup")
+                FSM_API.FSM_API.Create.CreateProcessingGroup("LineAppearanceGroup");
+                FSM_API.FSM_API.Create.CreateFiniteStateMachine("LineAppearance_FSM", 0, "LineAppearanceGroup")
                     .State("Visible", FSM_Behavior.OnEnterVisible, FSM_Behavior.OnUpdateVisible, FSM_Behavior.OnExitVisible)
                     .State("Hidden", FSM_Behavior.OnEnterHidden, FSM_Behavior.OnUpdateHidden, FSM_Behavior.OnExitHidden)
                     .State("Highlighted", FSM_Behavior.OnEnterHighlighted, FSM_Behavior.OnUpdateHighlighted, FSM_Behavior.OnExitHighlighted)
