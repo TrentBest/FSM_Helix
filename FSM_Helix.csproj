@@ -29,4 +29,7 @@
 	<ItemGroup>
 		<Reference Include="PresentationFramework" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="FSM_Bridge.Helix\Branding\" />
+	</ItemGroup>
 </Project>
