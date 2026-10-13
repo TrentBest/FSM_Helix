@@ -1,6 +1,43 @@
-﻿# **FSM\_Helix**
+![The Singularity Workshop animated moniker](https://raw.githubusercontent.com/TrentBest/TheSingularityWorkshop.Renderer/development/docs/assets/moniker.svg)
+
+# ✳️ 00 The Singularity Workshop — FSM_Helix
 
 ### **A State-Driven Abstraction for the Helix Toolkit** 💥
+> **A state-driven bridge between FSM_API and Helix Toolkit-based 3D/WPF applications.**
+
+This package provides FSM wrappers for managing the state of 3D objects and viewport behavior. It is a bridge package, not a replacement for either FSM_API or the Helix Toolkit.
+
+```mermaid
+flowchart TD
+  A[3D object / viewport] --> H[FSM_Helix state wrappers]
+  H --> F[FSM_API state management]
+  H --> T[Helix Toolkit / WPF]
+  F --> O[Predictable state transitions]
+```
+
+## 🟦 01 What
+
+FSM_Helix connects finite-state-machine behavior to Helix Toolkit objects so stateful 3D presentation can be managed through explicit FSM wrappers.
+
+## 🟣 02 Why
+
+Complex viewports combine concerns such as lifecycle, camera control, and rendering. Explicit FSM boundaries let those concerns be managed independently rather than hidden in a single collection of event handlers.
+
+## 🔺 03 How
+
+Use the wrappers around the relevant Helix Toolkit objects, keep state transitions in FSM_API, and let the WPF/Helix layer remain responsible for presentation. The existing examples below describe the repository's concrete integration surface.
+
+## 🟢 04 See it in a minute
+
+Start with the Getting Started section below, then build the project against its documented Helix Toolkit and FSM_API dependencies.
+
+## 🟪 05 Documentation and theory
+
+[Getting Started](#getting-started) · [Architectural Philosophy](#architectural-philosophy) · [Dependencies](#dependencies) · [License](#license)
+
+---
+
+## Detailed guide
 
 Welcome to **FSM\_Helix**—the architectural bridge between the powerful [Helix Toolkit](https://github.com/helix-toolkit/helix-toolkit) and the robust [FSM\_API](https://github.com/TrentBest/FSM_API) state management framework. This library is a testament to the principle that **"state shouldn't be a mess."** It provides a clean, predictable, and performant way to manage the state of 3D objects and rendering in a WPF application.
 
