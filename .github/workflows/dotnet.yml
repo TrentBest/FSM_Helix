@@ -1,34 +1,30 @@
-name: .NET CI/CD
+name: .NET CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "development" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "development" ]
+
+permissions:
+  contents: read
 
 jobs:
-  build-and-publish:
+  build:
     runs-on: windows-latest
+    timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '6.0.x'
-          
+          dotnet-version: '8.0.x'
+
       - name: Restore dependencies
         run: dotnet restore FSM_Bridge.Helix/FSM_Helix.csproj
-      
+
       - name: Build
         run: dotnet build FSM_Bridge.Helix/FSM_Helix.csproj --no-restore --configuration Release
-      
-      - name: Pack NuGet package
-        id: pack
-        run: |
-          dotnet pack FSM_Bridge.Helix/FSM_Helix.csproj --no-build -c Release -o ./nuget_packages --version-suffix "$GITHUB_RUN_NUMBER"
-          $packagePath = (Get-ChildItem -Path ./nuget_packages -Filter *.nupkg).FullName
-          echo "PACKAGE_PATH=$packagePath" >> $env:GITHUB_ENV
-      
-      - name: Publish to NuGet
-        run: dotnet nuget push "$env:PACKAGE_PATH" --api-key ${{secrets.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json"
