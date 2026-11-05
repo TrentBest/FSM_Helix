@@ -1,0 +1,19 @@
+{
+  "repository": "TrentBest/FSM_Helix",
+  "policy": "exactly-master-and-development",
+  "required_branches": [
+    "development",
+    "master"
+  ],
+  "actual_branches": [
+    "Integrate_FSM_API",
+    "Integrate_Helix",
+    "development",
+    "master"
+  ],
+  "branch_count": 4,
+  "status": "NON-COMPLIANT",
+  "evaluated_at": "2026-11-05T04:32:17Z",
+  "workflow_run": "https://github.com/TrentBest/FSM_Helix/actions/runs/41968402896",
+  "triggering_commit": "6b9118de3171fb94d3d5ac4532ba35752b9ff108"
+}
