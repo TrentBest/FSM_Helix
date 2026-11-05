@@ -2,6 +2,7 @@
 
 # ✳️ 00 The Singularity Workshop — FSM_Helix
 
+[![Sith Policy](assets/sith-policy.svg)](https://github.com/TrentBest/FSM_Helix/actions/workflows/sith-policy.yml)
 ### A state-driven bridge between FSM_API and the Helix Toolkit
 
 > **A preserved chapter in the Workshop's rendering history—not a current rendering-engine recommendation.**
